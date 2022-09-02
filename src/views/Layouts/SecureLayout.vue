@@ -8,16 +8,18 @@
             <b-icon-speedometer />
             Dashboard</b-nav-item
           >
-          <b-nav-item :to="{ name: 'book-borrow-page' }"
+          <b-nav-item :to="{ name: 'borrow-book-page' }"
             >Peminjaman Buku</b-nav-item
           >
-          <b-nav-item :to="{ name: 'book-return-page' }"
+          <b-nav-item :to="{ name: 'return-book-page' }"
             >Pengembalian Buku</b-nav-item
           >
           <b-nav-item v-b-toggle.sub-master-data>Master Data</b-nav-item>
           <b-collapse id="sub-master-data" class="sub-menu">
-            <b-nav-item :to="{ name: 'master-book' }">Buku</b-nav-item>
-            <b-nav-item :to="{ name: 'master-member' }">Keanggotaan</b-nav-item>
+            <b-nav-item :to="{ name: 'master-book-table' }">Buku</b-nav-item>
+            <b-nav-item :to="{ name: 'master-member-table' }"
+              >Keanggotaan</b-nav-item
+            >
           </b-collapse>
         </b-nav>
       </div>
@@ -44,7 +46,6 @@ export default {
 };
 </script>
 <style>
-
 #sidemenu {
   position: fixed;
   top: 0;
@@ -69,5 +70,6 @@ export default {
 }
 #main {
   margin-left: 230px;
+  min-height: 70vh;
 }
 </style>
