@@ -2,12 +2,11 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
-import { DataService } from "./services/DataService";
+
 import store from "@/store";
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 
 import "@/assets/scss/app.scss";
-
 
 Vue.mixin({
   data() {
@@ -24,7 +23,7 @@ Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
 Vue.config.productionTip = false;
-Vue.prototype.$dataService = new DataService();
+
 
 new Vue({
   router,
