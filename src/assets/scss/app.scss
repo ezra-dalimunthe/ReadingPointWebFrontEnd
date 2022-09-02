@@ -1,3 +1,20 @@
 @import "variables";
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap-vue/src/index.scss";
+
+.thead-primary {
+    background-color: $primary;
+    color: $white;
+}
+.thead-warning {
+    background-color: $warning;
+    color: $white;
+}
+.thead-info {
+    background-color: $info;
+    color: $white;
+}
+
+.table-striped tbody tr:nth-of-type(2n + 1) {
+    background-color: #f4f6f9;
+}
