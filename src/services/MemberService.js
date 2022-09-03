@@ -11,7 +11,7 @@ export class MemberService {
     return {
       crudUrl: "/api/v1/member",
       tableUrl: "/api/v1/members",
-      store(form) {
+      post(form) {
         return base.dataService.post(this.crudUrl, form);
       },
       update(form) {
@@ -23,12 +23,19 @@ export class MemberService {
       show(id) {
         return base.dataService.get(`${this.crudUrl}/${id}`);
       },
-      table(page = 1, perPage = 20, sortBy = null, sortDir = "asc") {
+      table(
+        page = 1,
+        perPage = 20,
+        sortBy = null,
+        sortDir = "asc",
+        filter = null,
+      ) {
         var params = {
           page: page,
           "per-page": perPage,
           "sort-by": sortBy,
           "sort-dir": sortDir,
+          search: filter,
         };
         return base.dataService.get(`${this.tableUrl}`, params);
       },

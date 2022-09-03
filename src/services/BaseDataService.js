@@ -45,7 +45,6 @@ export class BaseDataService {
 
   /*public functions */
   get(url, urlParams = null) {
-    console.log(url)
     var targetUrl = this._makeUrl(url, urlParams);
     const requestOptions = {
       method: "GET",
