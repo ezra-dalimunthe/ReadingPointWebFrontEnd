@@ -19,8 +19,9 @@ $yellow: #ffc107;
 $green: #93c54b;
 $teal: #20c997;
 $cyan: #29abe0;
+$light-blue:#b8d8d8;
 $primary: $blue;
-$secondary: $gray-600;
+$secondary: $light-blue;
 $success: $green;
 $info: $cyan;
 $warning: $orange;
@@ -39,9 +40,9 @@ $enable-gradients: true !important;
 
 $font-size-base: 1rem;
 
-$h1-font-size: $font-size-base * 2;
-$h2-font-size: $font-size-base * 1.9;
-$h3-font-size: $font-size-base * 1.75;
+$h1-font-size: $font-size-base * 1.75;
+$h2-font-size: $font-size-base * 1.5;
+$h3-font-size: $font-size-base * 1.25;
 $h4-font-size: $font-size-base * 1.5;
-$h5-font-size: $font-size-base * 1.25;
+$h5-font-size: $font-size-base * .75;
 $h6-font-size: $font-size-base !default;
