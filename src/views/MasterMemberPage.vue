@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>Master Data Keanggotaan</h1>
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view class="view"></router-view>
+    </transition>
   </div>
 </template>
 <script>
