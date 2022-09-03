@@ -10,20 +10,24 @@ import "@/assets/scss/app.scss";
 
 Vue.mixin({
   data() {
-    return {
-      API_URL: process.env.VUE_APP_PUBLIC_API_URL,
-      isLoggedIn: false,
-      breadcrumbItems: [{ text: "Home", to: { name: "home" } }],
-    };
+    return {};
   },
 });
 
-// Make BootstrapVue available throughout your project
-Vue.use(BootstrapVue);
-// Optionally install the BootstrapVue icon components plugin
+Vue.use(BootstrapVue, {
+  BFormGroup: {
+    labelColsSm: 4,
+    labelColsLg: 3,
+    contentColsSm: true,
+    contentColsLg: 7,
+  },
+  BCard: {
+    headerBgVariant:"secondary"
+  },
+});
+
 Vue.use(IconsPlugin);
 Vue.config.productionTip = false;
-
 
 new Vue({
   router,
