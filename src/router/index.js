@@ -6,9 +6,11 @@ import ReturnBookPage from "@/views/ReturnBookPage";
 import MasterBookPage from "@/views/MasterBookPage.vue";
 import BookTable from "@/views/MasterBook/BookTable.vue";
 import BookForm from "@/views/MasterBook/BookForm.vue";
+import BookDetail from "@/views/MasterBook/BookDetail.vue";
 import MasterMemberPage from "@/views/MasterMemberPage.vue";
 import MemberForm from "@/views/MasterMember/MemberForm.vue";
 import MemberTable from "@/views/MasterMember/MemberTable.vue";
+import MemberDetail from "@/views/MasterMember/MemberDetail.vue";
 import LoginForm from "@/views/Account/LoginForm";
 import store from "@/store";
 Vue.use(VueRouter);
@@ -51,7 +53,6 @@ const routes = [
       },
       {
         path: "/master/book",
-        name: "master-book-page",
         component: MasterBookPage,
         children: [
           {
@@ -60,15 +61,24 @@ const routes = [
             component: BookTable,
           },
           {
-            path: "form",
-            name: "master-book-form",
+            path: "new",
+            name: "master-book-new",
             component: BookForm,
+          },
+          {
+            path: "edit/:id",
+            name: "master-book-edit",
+            component: BookForm,
+          },
+          {
+            path: "view/:id",
+            name: "master-book-view",
+            component: BookDetail,
           },
         ],
       },
       {
         path: "/master/member",
-        name: "master-member-page",
         component: MasterMemberPage,
         children: [
           {
@@ -85,6 +95,11 @@ const routes = [
             path: "edit/:id",
             name: "master-member-edit",
             component: MemberForm,
+          },
+          {
+            path: "view/:id",
+            name: "master-member-view",
+            component: MemberDetail,
           },
         ],
       },
