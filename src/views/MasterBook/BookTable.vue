@@ -11,7 +11,7 @@
             @onSearch="onSearch"
           />
           <b-link
-            class="btn btn-outline-primary ml-4"
+            class="btn btn-primary ml-4"
             :to="{ name: 'master-book-new' }"
             >Baru</b-link
           >
@@ -31,10 +31,8 @@
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
       stacked="sm"
-      head-variant="primary"
-      primary-key="id"
-      tbody-tr-class="position-relative"
       ref="member_table"
+       tbody-tr-class="position-relative"
     >
       <template #cell(index)="data">
         {{ (currentPage - 1) * perPage + data.index + 1 }}.
@@ -47,7 +45,7 @@
           }"
           class="stretched-link"
         >
-         {{row.item.title}}
+          {{ row.item.title }}
         </b-link>
       </template>
     </b-table>
@@ -70,10 +68,11 @@ export default {
   data() {
     return {
       fields: [
-        { key: "index", label: "#", tdClass: "text-right" },
+        { key: "index", label: "#", tdClass: "text-right", },
         { key: "title", label: "Judul" },
-         { key: "author", label: "Pengarang", sortable: true },
+        { key: "author", label: "Pengarang", sortable: true },
         { key: "publisher", label: "Penerbit", sortable: true },
+        { key: "published_year", label: "Tahun", sortable: true },
         { key: "subject", label: "subyek" },
 
         { key: "classification", label: "Class", sortable: true },

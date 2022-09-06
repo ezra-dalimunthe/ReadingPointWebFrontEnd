@@ -6,12 +6,12 @@
         <div>
         <b-link
           v-if="prevRoute != null"
-          class="btn btn-outline-primary"
+          class="btn btn-primary"
           :to="{ name: prevRoute.name, query: prevRoute.query }"
           >Kembali</b-link
         >
         <b-link
-          class="btn btn-outline-primary ml-4"
+          class="btn btn-primary ml-4"
           :to="{ name: 'master-member-edit', params: { id: model.id } }"
           >Edit</b-link
         >

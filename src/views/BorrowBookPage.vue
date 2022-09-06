@@ -1,6 +1,7 @@
 <template>
   <div>
-  <h1>Peminjaman Buku</h1>
+    <h1>Peminjaman Buku</h1>
+    <router-view />
   </div>
 </template>
 <script>

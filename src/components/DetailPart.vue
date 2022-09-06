@@ -1,6 +1,6 @@
 <template>
-  <b-row>
-    <b-col :cols="labelWidth">
+  <b-row class="mb-2">
+    <b-col :cols="labelWidth" class="font-weight-bold ">
       {{ label }}
     </b-col>
     <b-col>:

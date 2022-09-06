@@ -2,17 +2,21 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap-vue/src/index.scss";
 
-.thead-primary {
-    background-color: $primary;
-    color: $white;
+@each $color, $value in $theme-colors {
+    @include bg-variant(".thead-#{$color}", $value, true);
 }
-.thead-warning {
-    background-color: $warning;
-    color: $white;
+
+@each $color, $value in $theme-colors {
+    @include text-emphasis-variant(".table-text-#{$color}", $value, true);
 }
-.thead-info {
-    background-color: $info;
-    color: $white;
+@if $enable-gradients {
+    @each $color, $value in $theme-colors {
+        @include bg-gradient-variant(".thead-gradient-#{$color}", $value, true);
+    }
+}
+
+.table-text-white {
+    color: var(--white);
 }
 
 .table-striped tbody tr:nth-of-type(2n + 1) {
@@ -21,6 +25,22 @@
 .shadow {
     box-shadow: 0 0.5rem 1rem #b8d8d8 !important;
 }
-.form-control{
+.form-control {
     border: 1px solid #b8d8d8;
+}
+.table a:hover {
+    text-decoration: none;
+}
+
+.table .btn {
+    padding: 0.1rem 0.7rem;
+    font-size: 0.875rem;
+    line-height: 0;
+    border-radius: 0.2rem;
+}
+.table .action{
+    width:80px;
+}
+.table .index{
+    width:50px;
 }

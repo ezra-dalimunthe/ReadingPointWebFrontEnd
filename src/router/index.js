@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomePage from "@/views/HomePage.vue";
+//import BorrowedBookTable from "@/views/BorrowBook/BorrowedBookTable";
+import BorrowBookForm from "@/views/BorrowBook/BorrowBookForm";
 import BorrowBookPage from "@/views/BorrowBookPage";
 import ReturnBookPage from "@/views/ReturnBookPage";
 import MasterBookPage from "@/views/MasterBookPage.vue";
@@ -43,8 +45,14 @@ const routes = [
       },
       {
         path: "book/borrow",
-        name: "borrow-book-page",
         component: BorrowBookPage,
+        children: [
+          {
+            path: "",
+            name: "borrow-book-form",
+            component: BorrowBookForm,
+          },
+        ],
       },
       {
         path: "book/return",

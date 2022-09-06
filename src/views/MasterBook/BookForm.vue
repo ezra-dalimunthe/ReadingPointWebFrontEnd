@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-between">
         <h4>{{ model.title }}</h4>
         <b-link
-          class="btn btn-outline-primary"
+          class="btn btn-primary"
           :to="{ name: 'master-book-table', query: prevRoute.query }"
           >Kembali</b-link
         >
@@ -81,6 +81,20 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group
+        label="Tahun Terbit"
+        label-for="model-published_year"
+        :invalid-feedback="modelMessagepublished_year"
+        content-cols-lg="2"
+      >
+        <b-form-input
+          id="model-published_year"
+          v-model="model.published_year"
+          :state="modelStatepublished_year"
+          :validated="validated"
+          class="shadow text-right"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group
         label="Jumlah Kopi"
         label-for="model-copies"
         :invalid-feedback="modelMessagecopies"
@@ -111,7 +125,7 @@
 
 <script>
 import { BookModel } from "@/services/BookService";
-import { BookService} from "@/services/BookService";
+import { BookService } from "@/services/BookService";
 export default {
   name: "BookForm",
   data() {
@@ -136,7 +150,7 @@ export default {
         this.isNew = false;
       }
     },
-   
+
     onSubmit(e) {
       e.preventDefault();
       var action = new BookService();
@@ -152,9 +166,10 @@ export default {
         result = action.Book.update(this.model);
       }
       result
-        .then(() => {
+        .then((payload) => {
           this.$router.push({
-            name: "master-book-table",
+            name: "master-book-view",
+            params: { id: payload.model.id },
           });
         })
         .catch((e) => {

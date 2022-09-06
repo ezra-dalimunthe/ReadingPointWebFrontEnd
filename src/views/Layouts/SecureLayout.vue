@@ -8,7 +8,7 @@
             <b-icon-speedometer />
             Dashboard</b-nav-item
           >
-          <b-nav-item :to="{ name: 'borrow-book-page' }"
+          <b-nav-item :to="{ name: 'borrow-book-form' }"
             >Peminjaman Buku</b-nav-item
           >
           <b-nav-item :to="{ name: 'return-book-page' }"

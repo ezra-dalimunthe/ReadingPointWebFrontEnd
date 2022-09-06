@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-between">
         <h4>{{ model.fullname }}</h4>
         <b-link
-          class="btn btn-outline-primary"
+          class="btn btn-primary"
           :to="{ name: 'master-member-table', query: prevRoute.query }"
           >Kembali</b-link
         >

@@ -1,26 +1,17 @@
 import { BaseDataService } from "./BaseDataService";
-export class BookService {
+export class BorrowBookService {
   constructor() {
     this.dataService = new BaseDataService(
-      process.env.VUE_APP_BOOK_SERVICE_URL
+      process.env.VUE_APP_BORROW_SERVICE_URL_URL
     );
   }
-  get Book() {
+  get BorrowedBook() {
     var base = this;
     return {
-      crudUrl: "/api/v1/book",
-      tableUrl: "/api/v1/books",
+      crudUrl: "/api/v1/book-borrow",
+      tableUrl: "/api/v1/book-borrows",
       store(form) {
         return base.dataService.post(this.crudUrl, form);
-      },
-      update(form) {
-        return base.dataService.put(`${this.crudUrl}/${form.id}`, form);
-      },
-      delete(id) {
-        return base.dataService.delete(`${this.crudUrl}/${id}`);
-      },
-      show(id) {
-        return base.dataService.get(`${this.crudUrl}/${id}`);
       },
       table(
         page = 1,
@@ -38,6 +29,18 @@ export class BookService {
         };
         return base.dataService.get(`${this.tableUrl}`, params);
       },
+      byMember(member_id) {
+        var params = {
+          page: 1,
+          "per-page": 100,
+          "sort-by": "loan_date",
+          "sort-dir": "asc",
+        };
+        return base.dataService.get(
+          `${this.crudUrl}/by-member/${member_id}`,
+          params
+        );
+      },
     };
   }
 }
@@ -49,5 +52,4 @@ export const BookModel = {
   subject: "",
   classification: "",
   copies: 1,
-  published_year: 2022,
 };

@@ -6,7 +6,9 @@
     fixed="top"
     class="mb-4"
   >
-    <b-navbar-brand :to="{ name: 'home' }">Reading Point</b-navbar-brand>
+    <b-navbar-brand :to="{ name: 'home' }">
+    <b-img src="/images/logo.png" style="max-height:24px"></b-img>
+    Reading Point</b-navbar-brand>
     <button
       type="button"
       aria-label="Toggle navigation"

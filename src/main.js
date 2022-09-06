@@ -22,7 +22,17 @@ Vue.use(BootstrapVue, {
     contentColsLg: 7,
   },
   BCard: {
-    headerBgVariant:"secondary"
+    headerClass: "bg-gradient-primary text-white",
+  },
+  BTable: {
+    hover: true,
+    headVariant: "gradient-info",
+    headRowVariant: "text-white",
+    primaryKey: "id",
+    noBorderCollapse: true,
+    emptyText: "",
+    emptyFilteredText: "Tidak ada data.",
+    showEmpty: true,
   },
 });
 

@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-end">
     <b-input-group>
       <template #prepend>
-        <b-dropdown :text="searchLabel" split variant="outline-primary">
+        <b-dropdown :text="searchLabel" split variant="primary">
           <b-dropdown-item
             v-for="item in filterFields"
             :key="item.label"
@@ -23,13 +23,29 @@
         class="mb-2 mb-sm-0"
         :placeholder="searchPlaceHolder"
         v-model="searchParam"
+        v-on:keyup.enter="onSearch"
       ></b-form-input>
       <template #append>
-        <b-button type="button" variant="outline-primary" @click="onSearch"
+        <b-button type="button" variant="primary" @click="onSearch"
           >Cari</b-button
         >
       </template>
     </b-input-group>
+    <b-toast :id="`search_toast` + _uid" variant="warning" solid>
+      <template #toast-title>
+        <div class="d-flex flex-grow-1 align-items-baseline">
+          <b-img
+            blank
+            blank-color="#ff5555"
+            class="mr-2"
+            width="12"
+            height="12"
+          ></b-img>
+          <strong class="mr-auto">Pencarian</strong>
+        </div>
+      </template>
+      {{ toast_message }}
+    </b-toast>
   </div>
 </template>
 <script>
@@ -52,6 +68,7 @@ export default {
       searchLabel: this.filterFields[0].label,
       searchParam: null,
       searchField: this.filterFields[0].value,
+      toast_message: "",
     };
   },
   methods: {
@@ -64,6 +81,9 @@ export default {
       if (this.searchField && this.searchParam) {
         var filter = JSON.stringify({ [this.searchField]: this.searchParam });
         this.$emit("onSearch", filter);
+      } else {
+        this.toast_message = "Keyword pencarian harus diisi.";
+        this.$bvToast.show("search_toast" + this._uid);
       }
     },
     onClear() {
