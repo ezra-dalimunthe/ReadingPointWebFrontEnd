@@ -1,7 +1,10 @@
-# uat
+# Reading Point
+
+adalah bagian dari project contoh pembuatan aplikasi dengan arsitektur microservice.
+
 
 ## Project setup
-
+ 
 ```
 npm install
 ```

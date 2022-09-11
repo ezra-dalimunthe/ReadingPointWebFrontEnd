@@ -176,7 +176,6 @@ export default {
           if (e.status) {
             switch (e.status) {
               case 422:
-                console.log(e.payload);
                 for (var p in this.model) {
                   this["modelState" + p] =
                     !Object.prototype.hasOwnProperty.call(e.payload, p);

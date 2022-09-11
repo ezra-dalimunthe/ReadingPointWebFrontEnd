@@ -1,0 +1,8 @@
+@mixin bg-gradient-flow-variant($parent, $color, $ignore-warning: false, $flow) {
+    #{$parent} {
+        background-image:  linear-gradient($flow, darken($color, 25%), $color)  !important;
+        background-repeat: repeat-x;
+        
+    }
+    @include deprecate("The `bg-gradient-variant` mixin", "v4.5.0", "v5", $ignore-warning);
+}

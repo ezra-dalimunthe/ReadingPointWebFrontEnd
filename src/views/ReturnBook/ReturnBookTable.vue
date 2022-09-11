@@ -65,7 +65,7 @@
 import { BookService } from "@/services/BookService";
 import CardTableHeaderFilter from "@/components/CardTableHeaderFilter";
 export default {
-  name: "BorrowBookTable",
+  name: "ReturnBookTable",
   components: { CardTableHeaderFilter },
   data() {
     return {

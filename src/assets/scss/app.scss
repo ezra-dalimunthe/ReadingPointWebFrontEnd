@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixing";
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap-vue/src/index.scss";
 
@@ -13,6 +14,15 @@
     @each $color, $value in $theme-colors {
         @include bg-gradient-variant(".thead-gradient-#{$color}", $value, true);
     }
+    @each $color, $value in $theme-colors {
+        @include bg-gradient-flow-variant(".bg-gradient-right-#{$color}", $value, true, to right);
+        @include bg-gradient-flow-variant(".bg-gradient-left-#{$color}", $value, true, to left);
+    }
+}
+
+.thead-gradient-info tr:first-child {
+    color: white;
+    border-bottom: 0;
 }
 
 .table-text-white {
@@ -38,9 +48,9 @@
     line-height: 0;
     border-radius: 0.2rem;
 }
-.table .action{
-    width:80px;
+.table .action {
+    width: 80px;
 }
-.table .index{
-    width:50px;
+.table .index {
+    width: 50px;
 }

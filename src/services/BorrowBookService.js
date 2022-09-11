@@ -2,7 +2,7 @@ import { BaseDataService } from "./BaseDataService";
 export class BorrowBookService {
   constructor() {
     this.dataService = new BaseDataService(
-      process.env.VUE_APP_BORROW_SERVICE_URL_URL
+      process.env.VUE_APP_BORROW_SERVICE_URL
     );
   }
   get BorrowedBook() {

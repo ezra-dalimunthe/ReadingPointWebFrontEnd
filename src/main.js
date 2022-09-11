@@ -1,8 +1,11 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import VueShowdown from 'vue-showdown'
 
+
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import moment from "moment";
 import store from "@/store";
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 
@@ -39,6 +42,20 @@ Vue.use(BootstrapVue, {
 Vue.use(IconsPlugin);
 Vue.config.productionTip = false;
 
+
+Vue.use(VueShowdown, {
+  flavor: 'github',
+  options: {
+    emoji: false,
+  },
+})
+Object.defineProperties(Vue.prototype, {
+  $moment: {
+    get: function () {
+      return moment;
+    },
+  },
+});
 new Vue({
   router,
   store,

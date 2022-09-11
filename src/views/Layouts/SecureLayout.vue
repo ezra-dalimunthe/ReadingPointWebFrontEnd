@@ -11,7 +11,7 @@
           <b-nav-item :to="{ name: 'borrow-book-form' }"
             >Peminjaman Buku</b-nav-item
           >
-          <b-nav-item :to="{ name: 'return-book-page' }"
+          <b-nav-item :to="{ name: 'return-book-form' }"
             >Pengembalian Buku</b-nav-item
           >
           <b-nav-item v-b-toggle.sub-master-data>Master Data</b-nav-item>
@@ -38,7 +38,7 @@
 
     <footer class="mt-4 mb-2">
       <div class="container text-center">
-        <p class="text-muted mb-0 py-2">© 2022 Unpri All rights reserved.</p>
+        <p class="text-muted mb-0 py-2">© 2022 Reading pOint All rights reserved.</p>
       </div>
     </footer>
   </div>
