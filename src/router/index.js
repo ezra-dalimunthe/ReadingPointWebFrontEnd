@@ -18,13 +18,13 @@ import LoginForm from "@/views/Account/LoginForm";
 import store from "@/store";
 Vue.use(VueRouter);
 
-// const ifAuthenticated = (to, from, next) => {
-//   if (store.getters.isAuthenticated) {
-//     next();
-//     return;
-//   }
-//   next("/login");
-// };
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next();
+    return;
+  }
+  next("/login");
+};
 const ifNotAuthenticated = (to, from, next) => {
   if (!store.getters.isAuthenticated) {
     next();
@@ -37,7 +37,7 @@ const routes = [
   {
     path: "/",
     component: () => import("@/views/Layouts/SecureLayout.vue"),
-
+    beforeEnter: ifAuthenticated,
     children: [
       {
         path: "",
@@ -47,11 +47,13 @@ const routes = [
       {
         path: "book/borrow",
         component: BorrowBookPage,
+
         children: [
           {
             path: "",
             name: "borrow-book-form",
             component: BorrowBookForm,
+            meta: { roles: ["front_desk"] },
           },
         ],
       },
@@ -63,6 +65,7 @@ const routes = [
             path: "",
             name: "return-book-form",
             component: ReturnBookForm,
+            meta: { roles: ["front_desk"] },
           },
         ],
       },
@@ -74,21 +77,25 @@ const routes = [
             path: "",
             name: "master-book-table",
             component: BookTable,
+            meta: { roles: ["book_manager"] },
           },
           {
             path: "new",
             name: "master-book-new",
             component: BookForm,
+            meta: { roles: ["book_manager"] },
           },
           {
             path: "edit/:id",
             name: "master-book-edit",
             component: BookForm,
+            meta: { roles: ["book_manager"] },
           },
           {
             path: "view/:id",
             name: "master-book-view",
             component: BookDetail,
+            meta: { roles: ["book_manager"] },
           },
         ],
       },
@@ -100,21 +107,25 @@ const routes = [
             path: "",
             name: "master-member-table",
             component: MemberTable,
+            meta: { roles: ["member_manager"] },
           },
           {
             path: "new",
             name: "master-member-new",
             component: MemberForm,
+            meta: { roles: ["member_manager"] },
           },
           {
             path: "edit/:id",
             name: "master-member-edit",
             component: MemberForm,
+            meta: { roles: ["member_manager"] },
           },
           {
             path: "view/:id",
             name: "master-member-view",
             component: MemberDetail,
+            meta: { roles: ["member_manager"] },
           },
         ],
       },
@@ -135,7 +146,11 @@ const routes = [
         component: LoginForm,
         beforeEnter: ifNotAuthenticated,
       },
-
+      {
+        path: "forbidden",
+        name: "forbidden",
+        component: () => import("@/views/Errors/PageError403.vue"),
+      },
       {
         path: "*",
         name: "page-error-404",
@@ -150,6 +165,24 @@ const router = new VueRouter({
   scrollBehavior() {
     document.getElementById("app").scrollIntoView();
   },
+});
+router.beforeEach((to, from, next) => {
+  if (to.meta.roles) {
+    const roleExists = to.meta.roles.some((value) => {
+      if (!store.getters.user.roles) {
+        return false;
+      }
+      return store.getters.user.roles.some((item) => {
+        return item.role == value;
+      });
+    });
+
+    if (roleExists == false) {
+      next("/forbidden");
+      return;
+    }
+  }
+  return next();
 });
 
 export default router;

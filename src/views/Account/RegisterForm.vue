@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { authService } from "@/services/authService";
+import { AuthService } from "@/services/AuthService";
 export default {
   name:"RegisterForm",
   data() {
@@ -121,7 +121,7 @@ export default {
       if (this.formType === "login") {
         this.submitLoading = true;
 
-        var action = new authService(this.$dataService);
+        var action = new AuthService();
         action
           .login(this.form)
           .then((data) => {

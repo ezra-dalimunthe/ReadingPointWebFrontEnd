@@ -203,8 +203,8 @@ export default {
     onConfirmed() {
       var borrowedBook = this.bookToReturn;
 
-      new BookReturnService().returnBook(borrowedBook).then((payload) => {
-        console.log(payload)
+      new BookReturnService().returnBook(borrowedBook).then(() => {
+       
         var filtered = this.member_book_table.items.filter((item) => {
           return item.id != borrowedBook.id;
         });

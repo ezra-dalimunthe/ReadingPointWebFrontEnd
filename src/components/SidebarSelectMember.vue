@@ -106,10 +106,14 @@ export default {
           ctx.sortBy,
           ctx.sortDesc ? "desc" : "asc",
           ctx.filter
-        ).then((payload) => {
-          this.totalRows = payload.total;
-          callback(payload.data);
-        });
+        )
+          .then((payload) => {
+            this.totalRows = payload.total;
+            callback(payload.data);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       } else {
         this.currentPage = 1;
         this.totalRows = 0;

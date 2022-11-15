@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  nginx:
+    image: docker.io/nginx:alpine
+    container_name: reading-point-frontend
+    restart: unless-stopped
+    ports:
+      - "8900:8000"
+
+    volumes:
+      - ./site.conf:/etc/nginx/conf.d/site.conf:ro
+      - ./dist:/var/www/html/dist:ro
+    environment:
+      VUE_APP_AUTH_SERVICE_URL: http://127.0.0.1:8901
+      VUE_APP_BOOK_SERVICE_URL: http://127.0.0.1:8902
+      VUE_APP_MEMBER_SERVICE_URL: http://127.0.0.1:8903
+      VUE_APP_BORROW_SERVICE_URL: http://127.0.0.1:8904
+     
+    networks:
+      - reading-point-frontend-network
+      
+networks:
+  reading-point-frontend-network:
+    driver: bridge
+    name: reading-point-frontend-network

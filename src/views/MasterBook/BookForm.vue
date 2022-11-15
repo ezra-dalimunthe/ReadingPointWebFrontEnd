@@ -167,12 +167,14 @@ export default {
       }
       result
         .then((payload) => {
+          console.log(payload)
           this.$router.push({
             name: "master-book-view",
             params: { id: payload.model.id },
           });
         })
         .catch((e) => {
+          console.log(e)
           if (e.status) {
             switch (e.status) {
               case 422:

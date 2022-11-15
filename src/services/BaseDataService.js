@@ -7,6 +7,7 @@ export class BaseDataService {
     var header = new Headers();
     header.append("Content-type", "application/json");
     var token = localStorage.getItem("token");
+
     if (token) {
       header.append("Authorization", "Bearer " + token);
     }
@@ -16,7 +17,8 @@ export class BaseDataService {
   async _fetch(request) {
     return await fetch(request).then((response) => {
       var json = response.json();
-      if (response.status === 200) {
+
+      if (parseInt(response.status) >= 200 && parseInt(response.status) < 300) {
         return json;
       } else {
         return json.then((data) => {
@@ -103,7 +105,7 @@ export class BaseDataService {
     };
     const req = new Request(targetUrl, requestOptions);
     return await fetch(req).then((response) => {
-      if (response.status === 200) {
+      if (response.status >= 200 || response.status < 300) {
         var blob = response.blob();
         return blob;
       } else {

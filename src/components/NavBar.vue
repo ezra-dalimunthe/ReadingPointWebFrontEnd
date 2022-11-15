@@ -20,10 +20,13 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+     <b-navbar-nav class="ml-auto">
+      <b-nav-item href="#">{{userProfile.display_name}}</b-nav-item>
+     </b-navbar-nav>
   </b-navbar>
 </template>
 <script>
-import { authService } from "@/services/authService";
+import { AuthService } from "@/services/AuthService";
 
 export default {
   data() {
@@ -33,7 +36,7 @@ export default {
   },
   methods: {
     logOut() {
-      var action = new authService(this.$dataService);
+      var action = new AuthService();
       action.logout().finally(() => {
         this.$store
           .dispatch("ACTION_LOGOUT")
@@ -48,7 +51,7 @@ export default {
   computed: {
     loggedInUserFullname() {
       var user = this.$store.getters.user;
-      return user.name;
+      return user.display_name;
     },
   },
 };

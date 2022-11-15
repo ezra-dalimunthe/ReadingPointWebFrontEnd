@@ -8,16 +8,30 @@
             <b-icon-speedometer />
             Dashboard</b-nav-item
           >
-          <b-nav-item :to="{ name: 'borrow-book-form' }"
+          <b-nav-item
+            :to="{ name: 'borrow-book-form' }"
+            v-if="isInRoles(['front_desk'])"
             >Peminjaman Buku</b-nav-item
           >
-          <b-nav-item :to="{ name: 'return-book-form' }"
+          <b-nav-item
+            :to="{ name: 'return-book-form' }"
+            v-if="isInRoles(['front_desk'])"
             >Pengembalian Buku</b-nav-item
           >
-          <b-nav-item v-b-toggle.sub-master-data>Master Data</b-nav-item>
+          <b-nav-item
+            v-b-toggle.sub-master-data
+            v-if="isInRoles(['book_manager', 'member_manager'])"
+            >Master Data</b-nav-item
+          >
           <b-collapse id="sub-master-data" class="sub-menu">
-            <b-nav-item :to="{ name: 'master-book-table' }">Buku</b-nav-item>
-            <b-nav-item :to="{ name: 'master-member-table' }"
+            <b-nav-item
+              :to="{ name: 'master-book-table' }"
+              v-if="isInRoles(['book_manager'])"
+              >Buku</b-nav-item
+            >
+            <b-nav-item
+              :to="{ name: 'master-member-table' }"
+              v-if="isInRoles(['member_manager'])"
               >Keanggotaan</b-nav-item
             >
           </b-collapse>
@@ -27,7 +41,7 @@
           <b-nav-item v-if="false" :to="{ name: 'profile' }"
             >Profile</b-nav-item
           >
-          <b-nav-item v-if="false" href="#">Sign Out</b-nav-item>
+          <b-nav-item @click="signOut">Sign Out</b-nav-item>
           <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
         </b-nav>
       </div>
@@ -38,19 +52,42 @@
 
     <footer class="mt-4 mb-2">
       <div class="container text-center">
-        <p class="text-muted mb-0 py-2">© 2022 Reading pOint All rights reserved.</p>
+        <p class="text-muted mb-0 py-2">
+          © 2022 Reading pOint All rights reserved.
+        </p>
       </div>
     </footer>
   </div>
 </template>
 <script>
 import NavBar from "@/components/NavBar.vue";
+import { AuthService } from "@/services/AuthService";
 export default {
   name: "SecureLayout",
   components: { NavBar },
   methods: {
     loggedOut() {
       this.$forceUpdate();
+    },
+    signOut() {
+      var action = new AuthService();
+      action.logout().then((data) => {
+        this.$store.dispatch("ACTION_LOGOUT", data).then(() => {
+          this.$router.push({ name: "login" });
+        });
+      });
+    },
+    isInRoles(roles) {
+      const roleExists = roles.some((value) => {
+        if (!this.$store.getters.user.roles) {
+          return false;
+        }
+        return this.$store.getters.user.roles.some((item) => {
+          return item.role == value;
+        });
+      });
+
+      return roleExists != false;
     },
   },
 };
